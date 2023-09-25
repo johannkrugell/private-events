@@ -1,0 +1,11 @@
+<!-- View all events created -->
+<%= render 'shared/navbar' %>
+<h3 class="p-3 text-center text-slate-700 text-xl">Event Listing</h3>
+<div>
+  <% @events.each do |event| %>
+    <h2><%= link_to event.title, event_path(event) %></h2>
+    <p><%= event.description %></p>
+    <p><%= event.date %></p>
+    <p><%= event.location %></p>
+  <% end %>
+</div>
