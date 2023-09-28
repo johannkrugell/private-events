@@ -13,8 +13,10 @@
 
   <body>
     <main>
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+    <!-- render shared flash -->
+      <%= render 'shared/flash' %>
+      <!-- <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p> -->
       <%= yield %>
     </main>
   </body>

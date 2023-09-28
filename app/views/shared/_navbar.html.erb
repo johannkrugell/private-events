@@ -1,9 +1,20 @@
 <nav class="">
-  <ul class="p-3 h-16 grid grid-cols-12 gap-4 bg-slate-100 shadow-md items-center ">
-    <li class=" col-span-8 text-black font-semibold">eventbrite.</li>
-    <li class="text-slate-600 justify-self-center">Home</li>
-    <li class="text-slate-600 justify-self-center">Register</li>
-    <li class="text-slate-600 justify-self-center">Log In</li>
-    <li class="text-white justify-self-center rounded p-2 bg-indigo-600">SIGN UP</li>
-  </ul>
+  <div class="p-3 h-16 grid grid-cols-4 gap-4 bg-slate-100 shadow-md items-center ">
+    <div class=" text-black font-semibold col-span-2">eventbrite.</div>
+      <!-- If the User is logged in display the user name -->
+    <div class="grid grid-flow-col col-span-1 gap-1 justify-items-end items-center">
+      <% if user_signed_in? %>
+        <div class="text-slate-600"><%= "#{current_user.first_name} #{current_user.last_name} |" %></div>
+      <% end %>
+    </div>
+    <div class="grid grid-flow-col grid-cols-3 gap-1 col-span-1 justify-items-center items-center">
+      <div class="text-slate-600"><%= link_to "Home", events_path %></div>
+      <% if user_signed_in? %>
+        <div class="text-slate-600"><%= button_to "Log Out", destroy_user_session_path, method: :delete %></div>
+      <% else %>
+        <div class="text-slate-600"><%= link_to "Log In", user_session_path %></div>
+      <% end %>
+      <div class="text-white rounded p-2 bg-indigo-600"><%= link_to "SIGN UP", new_user_registration_path %></div>
+    </div>
+  </div>
 </nav>
