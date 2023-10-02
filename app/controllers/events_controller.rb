@@ -21,9 +21,18 @@ class EventsController < ApplicationController
     end
   end
 
+  def my_events
+    @my_events = current_user.created_events
+  end
+
   private
 
   def event_params
-    params.require(:event).permit(:title, :description, :date, :location)
+    params.require(:event).permit(:title, :description, :date, :location, :user_id)
+  end
+
+  def correct_user
+    @event = current_user.created_events.find_by(id: params[:id])
+    redirect_to root_url if @event.nil?
   end
 end

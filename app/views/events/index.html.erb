@@ -1,26 +1,42 @@
-<!-- View all events created -->
-<%= render 'shared/navbar' %>
+
+
+<div class="relative bg-cover bg-center h-[500px]">
+  <!-- Background Image -->
+  <%= image_tag "pexels-teddy-yang-2263436.jpg", class: "absolute inset-0 w-full h-full object-cover",
+    class: "absolute inset-0 w-full h-full object-cover" %>
+ 
+  <!-- Content Overlay -->
+  <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+  
+  <!-- Content -->
+  <div class="flex flex-col items-center justify-center h-full relative z-10  text-white">
+    <h1 class="text-4xl font-bold">Brite Events</h1>
+    <p class="mt-2 text-lg">Unlock Memorable Experiences, One Event at a Time!</p>
+  </div>
+</div>
+
+
 <h3 class="p-3 text-center text-indigo-950 text-xl">Event Listing</h3>
 <div class="grid grid-cols-3 grid-flow-col-dense content-center justify-items-center gap-2 p-3">
   <% @events.each do |event| %>
-  <div class="p-5 ml-2 shadow-md grid grid-cols-1 w-[450px]  bg-indigo-50">
-    <h2 class="font-semibold text-indigo-950 text-lg"><%= link_to event.title, event_path(event) %></h2>
-    <div class="grid grid-cols-2 pb-2 pt-2"> 
-      <p class="text-indigo-600">Description:</p>
-      <p class="text-sm h-[80px]"><%= event.description %></p>
+    <div class="p-5 ml-2 shadow-md grid grid-cols-1 w-[450px] bg-indigo-50">
+      <h2 class="font-semibold text-indigo-950 text-lg"><%= link_to event.title, event_path(event) %></h2>
+      <div class="grid grid-cols-2 pb-2 pt-2"> 
+        <p class="text-indigo-600">Description:</p>
+        <p class="text-sm h-[80px]"><%= event.description %></p>
+      </div>
+      <div class="grid grid-cols-2 pb-2">
+        <p class="text-indigo-600">Date:</p> 
+        <p class="text-sm"><%= event.date.strftime("%m/%d/%Y") %></p> 
+      </div>
+      <div class="grid grid-cols-2 pb-2">
+        <p class="text-indigo-600">Location:</p>
+        <p class="text-sm"><%= event.location %></p>
+      </div>
+      <div class="grid grid-cols-2 pb-2">
+        <p class="text-indigo-600">Host:</p>
+        <p class="text-sm"><%= "#{event.creator.first_name} #{event.creator.last_name}" %></p>
+      </div>
     </div>
-    <div class="grid grid-cols-2 pb-2">
-      <p class="text-indigo-600">Date:</p> 
-      <p class="text-sm"><%= event.date.strftime("%m/%d/%Y") %></p> 
-    </div>
-    <div class="grid grid-cols-2 pb-2">
-      <p class="text-indigo-600">Location:</p>
-      <p class="text-sm"><%= event.location %></p>
-    </div>
-    <div class="grid grid-cols-2 pb-2">
-      <p class="text-indigo-600">Host:</p>
-      <p class="text-sm"><%= "#{event.creator.first_name} #{event.creator.last_name}" %></p>
-    </div>
-  </div>
   <% end %>
 </div>

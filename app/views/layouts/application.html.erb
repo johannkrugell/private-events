@@ -15,8 +15,16 @@
     <main>
     <!-- render shared flash -->
       <%= render 'shared/flash' %>
-      <!-- <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p> -->
+    <!-- If a user is logged in render session navbar else render navbar -->
+      <div>
+        <% if user_signed_in? %>
+          <%= render 'shared/session_navbar' %>
+        <% else %>
+          <%= render 'shared/navbar' %>
+        <% end %>
+      </div>
+    <!-- <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p> -->
       <%= yield %>
     </main>
   </body>
