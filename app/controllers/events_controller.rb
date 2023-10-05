@@ -2,6 +2,7 @@
 
 # EventsController to handle events
 class EventsController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:index]
   # Index to display all events
   def index
     @events = Event.all
@@ -29,10 +30,5 @@ class EventsController < ApplicationController
 
   def event_params
     params.require(:event).permit(:title, :description, :date, :location, :user_id)
-  end
-
-  def correct_user
-    @event = current_user.created_events.find_by(id: params[:id])
-    redirect_to root_url if @event.nil?
   end
 end
