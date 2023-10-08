@@ -3,6 +3,7 @@
 # EventsController to handle events
 class EventsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
+
   # Index to display all events
   def index
     @events = Event.all
@@ -22,8 +23,25 @@ class EventsController < ApplicationController
     end
   end
 
+  def show
+    @event = Event.find(params[:id])
+    @attendees = @event.attendees
+  end
+
   def my_events
     @my_events = current_user.created_events
+  end
+
+  def attend
+    event = Event.find(params[:id])
+
+    # Check if the user is already attending the event to prevent duplicates
+    unless event.attendees.include?(current_user)
+      event.attendees << current_user
+    end
+
+    # Redirect or respond as necessary
+    redirect_to event, notice: 'You are now attending this event.'
   end
 
   private

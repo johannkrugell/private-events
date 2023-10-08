@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 class Event < ApplicationRecord
-  # event model with event name, description, date, and location
+  # Association for the user who created this event
   belongs_to :creator, class_name: 'User', foreign_key: 'user_id'
-  # has_many :event_attendees, foreign_key: :attended_event_id
-  # has_many :attendees, through: :event_attendees, source: :attendee
+
+  # Association for users attending this event
+  has_and_belongs_to_many :attendees, class_name: 'User', join_table: 'events_users'
 
   validates :title, presence: true, length: { maximum: 50 }
   validates :description, presence: true, length: { maximum: 500 }

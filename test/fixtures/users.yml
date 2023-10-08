@@ -5,6 +5,7 @@
 # below each fixture, per the syntax in the comments below
 #
 john:
-  first_name: John
-  last_name: Doe
-  email: john@example.com
+  first_name: "John"
+  last_name: "Doe"
+  email: "john@example.com"
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>

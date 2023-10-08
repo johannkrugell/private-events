@@ -27,4 +27,35 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     get my_events_path
     assert_response :success
   end
+
+  # A logged in user can attend and event
+  test 'logged in user can attend an event' do
+    # Setup - Login the user
+    user = users(:john)
+    sign_in user
+
+    # Setup - Get an event
+    event = events(:sample_event)
+
+    # Action - User attending the event
+    post attend_event_path(event)
+
+    # Assertions
+    assert_response :redirect  # Assuming you're redirecting after the action
+    assert event.attendees.include?(user), "User should be in the event's attendees list"
+  end
+
+  # Click on an event to view the event details
+  test 'should show event' do
+    # Setup - Get an event
+    event = events(:sample_event)
+
+    # Action - Visit the event show page
+    get event_path(event)
+
+    # Assertions
+    assert_response :success
+    assert_select 'h1', event.title
+    assert_select 'p', event.description
+  end
 end
