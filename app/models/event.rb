@@ -14,4 +14,12 @@ class Event < ApplicationRecord
 
   # scope :past, -> { where('date < ?', Time.zone.now) }
   # scope :upcoming, -> { where('date >= ?', Time.zone.now) }
+
+  def self.past_events
+    where('date < ?', DateTime.now)
+  end
+
+  def self.upcoming_events
+    where('date >= ?', DateTime.now)
+  end
 end

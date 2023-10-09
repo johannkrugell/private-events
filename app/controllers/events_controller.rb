@@ -3,6 +3,7 @@
 # EventsController to handle events
 class EventsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
+  before_action :past_events, only: [:my_events]
 
   # Index to display all events
   def index
@@ -30,6 +31,14 @@ class EventsController < ApplicationController
 
   def my_events
     @my_events = current_user.created_events
+  end
+
+  def past_events
+    @past_events = current_user.created_events
+  end
+
+  def upcoming_events
+    @upcoming_events = current_user.created_events.upcoming_events
   end
 
   def attend
