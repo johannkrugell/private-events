@@ -7,7 +7,11 @@ class EventsController < ApplicationController
 
   # Index to display all events
   def index
-    @events = Event.all
+    if params[:view] == 'past'
+      @events = Event.past_events
+    else # Default to future events if no type is provided or if it's not 'past'
+      @events = Event.upcoming_events
+    end
   end
 
   def new
