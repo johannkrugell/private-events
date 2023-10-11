@@ -57,6 +57,18 @@ class EventsController < ApplicationController
     redirect_to event, notice: 'You are now attending this event.'
   end
 
+  def attending
+    @attending_events = current_user.attended_events
+  end
+
+  def unattend
+  event = Event.find(params[:id])
+  current_user.attended_events.delete(event)
+
+  # Optionally, redirect the user with a message
+  redirect_to attending_events_path, notice: "You're no longer attending this event."
+  end
+
   private
 
   def event_params
