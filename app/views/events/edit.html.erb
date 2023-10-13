@@ -1,0 +1,45 @@
+<!-- Check that the user is logged in before creating an event -->
+<% if @event.errors.any? %>
+  <div class="error_messages">
+    <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
+    <ul>
+      <% @event.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+  <h1 class="p-3 text-center text-indigo-950 font-semibold text-xl">Edit event</h1>
+    <div class="grid grid-cols-1 place-items-center">
+      <%= form_with(model: @event, local: true) do |form| %>
+        <div class="w-[500px]">
+          <%= form.label :title %>
+          <%= form.text_field :title , required: true, 
+            class: "block border border-grey-light w-full p-3 rounded mb-4" %>
+        </div>
+
+        <div class="field">
+          <%= form.label :date %>
+          <%= form.date_field :date, required: true,
+            class:"block border border-grey-light w-full p-3 rounded mb-4" %>
+        </div>
+
+        <div class="field">
+          <%= form.label :location %>
+          <%= form.text_field :location, required: true,
+            class:"block border border-grey-light w-full p-3 rounded mb-4" %>
+        </div>
+
+        <div class="">
+          <%= form.label :description %>
+          <%= form.text_area :description, required: true,
+            class:"block border border-grey-light w-full h-40 p-3 rounded mb-4" %>
+        </div>
+
+        <div class="mb-4 h-12 text-white text-center text-middle p-2.5 bg-indigo-600 rounded">
+          <%= form.submit 'Update Event' %>
+        </div>
+      <% end %>
+    </div>
+
+

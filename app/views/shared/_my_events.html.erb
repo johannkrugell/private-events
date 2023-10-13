@@ -45,6 +45,23 @@
             <% end %>
           </ul>
         </div>
+
+        <!-- Edit Event -->
+        <div class = "grid grid-flow-col grid-cols-[8px, 8px]">
+          <div class="pt-2">
+            <%= link_to edit_event_path(event), class: "bg-indigo-900 text-white text-xs p-2 rounded-full" do %>
+              Edit Event
+            <% end %>
+          </div>
+
+          <!-- Destroy Event -->
+          <div class="pt-2">
+            <%= button_to event_path(event), method: :delete, data: { confirm: 'Are you sure you want to delete this event?' },  
+                class: "bg-indigo-900 text-white text-xs p-2 rounded-full" do %>
+              Delete Event
+            <% end %>
+          </div>
+        </div>
       </div>
     <% end %>
   <% end %>

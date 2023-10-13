@@ -5,7 +5,7 @@ class Event < ApplicationRecord
   belongs_to :creator, class_name: 'User', foreign_key: 'user_id'
 
   # Association for users attending this event
-  has_and_belongs_to_many :attendees, class_name: 'User', join_table: 'events_users'
+  has_and_belongs_to_many :attendees, class_name: 'User', join_table: 'events_users', dependent: :destroy
 
   validates :title, presence: true, length: { maximum: 50 }
   validates :description, presence: true, length: { maximum: 500 }

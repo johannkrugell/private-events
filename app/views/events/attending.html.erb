@@ -49,10 +49,8 @@
 
         <!-- Attend Button -->
         <div class ="pt-2">
-          <button class=>
-            <%= button_to "Unattend Event", unattend_event_path(event), method: :post, 
-              class:"bg-indigo-900 text-white text-xs p-2 rounded-full" %>
-          </button>
+          <%= button_to "Unattend Event", unattend_event_path(event), method: :post, 
+            class:"bg-indigo-900 text-white text-xs p-2 rounded-full" %>
         </div>
       </div>
     <% end %>
